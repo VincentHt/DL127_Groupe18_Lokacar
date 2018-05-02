@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import lokacar.projet.R;
+import lokacar.projet.activities.locations.ListLocationsActivity;
 import lokacar.projet.activities.vehicules.ListVehiculesActivity;
 
 public class ActionsChoiceActivity extends AppCompatActivity {
@@ -22,19 +23,22 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         btnGestionClients = findViewById(R.id.btnGestionClients);
         btnGestionVehicules = findViewById(R.id.btnGestionVehicules);
         btnGestionLocations = findViewById(R.id.btnGestionLocations);
-
     }
 
-    public void choixActionOnClick(View view) {
+    public void gestionVehiculesOnClick(View view) {
+        Intent intent = new Intent(ActionsChoiceActivity.this, ListVehiculesActivity.class);
+        startActivity(intent);
+    }
 
-        Intent intent;
+    public void gestionClientsOnClick(View view) {
+        /*
+        * Intent intent = new Intent(ActionsChoiceActivity.this, ClientsMainActivity.class);
+        * startActivity(intent);
+        */
+    }
 
-        if(btnGestionVehicules.isSelected()){
-            intent = new Intent(ActionsChoiceActivity.this, ListVehiculesActivity.class);
-        } else if(btnGestionClients.isSelected()){
-            /*intent = new Intent(ActionsChoiceActivity.this; ClientsMainActivity.class);*/
-        }
-
-
+    public void gestionLocationsOnClick(View view) {
+        Intent intent = new Intent(ActionsChoiceActivity.this, ListLocationsActivity.class);
+        startActivity(intent);
     }
 }

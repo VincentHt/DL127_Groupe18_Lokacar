@@ -16,6 +16,7 @@ import android.widget.Toast;
 import lokacar.projet.R;
 import lokacar.projet.bo.agence.AgenceContract;
 import lokacar.projet.dal.agences.AgenceDbHelper;
+import lokacar.projet.dal.locations.LocationBddHelper;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -59,6 +60,7 @@ public class ConnexionActivity extends AppCompatActivity {
     String codeAgence = null;
     String nomAgence = null;
     private AgenceDbHelper dbHelper;
+    private LocationBddHelper locationBddHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,9 @@ public class ConnexionActivity extends AppCompatActivity {
         mValiderConnexionButton = (Button)findViewById(R.id.mConnectionButton);
         mChangeAgencyButton = (Button) findViewById(R.id.btnChangementAgence);
 
-        // Create a DB helper (this will create the DB if run for the first time)
+        // Create a DB helper (this will create the DB if run for the first time, and the different tables needed in the application)
         dbHelper = new AgenceDbHelper(this);
+        locationBddHelper = new LocationBddHelper(this);
 
         mDb = dbHelper.getWritableDatabase();
 

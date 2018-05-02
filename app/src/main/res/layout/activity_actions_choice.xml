@@ -10,24 +10,24 @@
         android:id="@+id/btnGestionVehicules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gestion des Véhicules"
+        android:text="@string/txtBtnGestionVehicules"
         android:layout_margin="10dp"
-        android:onClick="choixActionOnClick"/>
+        android:onClick="gestionVehiculesOnClick"/>
 
     <Button
         android:id="@+id/btnGestionClients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gestion des Clients"
-        android:onClick="choixActionOnClick"
+        android:text="@string/txtBtnGestionClients"
+        android:onClick="gestionClientsOnClick"
         android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/btnGestionLocations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gestion des Locations"
-        android:onClick="choixActionOnClick"
+        android:text="@string/txtBtnGestionLocations"
+        android:onClick="gestionLocationsOnClick"
         android:layout_margin="10dp"/>
 
 </LinearLayout>

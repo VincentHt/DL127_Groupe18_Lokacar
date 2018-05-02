@@ -24,6 +24,12 @@ public class Vehicule implements Parcelable {
         this.description = description;
     }
 
+    public Vehicule(int id, String marque, String modele){
+        this.id = id;
+        this.marque = marque;
+        this.modele = modele;
+    }
+
     public Vehicule(){
     }
 

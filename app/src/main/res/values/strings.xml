@@ -8,4 +8,12 @@
     <string name="database_name">bdd_lokacar.db</string>
     <string name="title_activity_list_vehicules">ListVehiculesActivity</string>
     <string name="title_activity_list_locations">ListLocationsActivity</string>
+    <string name="txtBtnGestionVehicules">Gestion des Véhicules</string>
+    <string name="txtBtnGestionClients">Gestion des Clients</string>
+    <string name="txtBtnGestionLocations">Gestion des Locations</string>
+    <string name="cdPhotoVehicule">photoVehicule</string>
+    <string name="txtVehicule">Véhicule :</string>
+    <string name="txtClient">Client :</string>
+    <string name="txtDebut">Début :</string>
+    <string name="txtFin">Fin :</string>
 </resources>
