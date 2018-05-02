@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
 import lokacar.projet.activities.vehicules.ListVehiculesActivity;
@@ -12,7 +13,7 @@ import lokacar.projet.activities.vehicules.ListVehiculesActivity;
 public class ActionsChoiceActivity extends AppCompatActivity {
 
     private Button btnGestionVehicules, btnGestionClients, btnGestionLocations;
-
+    android.content.Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         btnGestionClients = findViewById(R.id.btnGestionClients);
         btnGestionVehicules = findViewById(R.id.btnGestionVehicules);
         btnGestionLocations = findViewById(R.id.btnGestionLocations);
+
+        String mAppName = ((AppName) this.getApplication()).getmAppName();
+        setTitle(mAppName);
 
     }
 
@@ -36,5 +40,17 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void choixListeVehiculeOnClick(View view){
+        Class destinationActivity = ListVehiculesActivity.class;
+            Intent myIntent = new Intent(context, destinationActivity);
+            startActivity(myIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 }

@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+tools:context="lokacar.projet.activities.vehicules.ListVehiculesActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+    <Button
+        android:id="@+id/voiture_filtre_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:onClick="rechercherVoitureFiltre"
+        android:text="@string/voiture_filtre_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
+    <Button
+        android:id="@+id/utilitaire_filtre_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="rechercherUtilitaireFiltre"
+        android:text="@string/utilitaire_filtre_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
+    <Button
+        android:id="@+id/vehicules_tout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="rechercherVehiculesFiltre"
+        android:text="@string/vehicules_tout"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
+</LinearLayout>
+<Button
+    android:id="@+id/ajouter_button"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorPrimary"
+    android:onClick="onclickAjouterVehicule"
+    android:text="@string/ajouter_vehicule_text"
+    android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/mVehiculeRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="lokacar.projet.activities.vehicules.ListVehiculesActivity"
-    tools:showIn="@layout/activity_list_vehicules">
-
-</android.support.constraint.ConstraintLayout>
+    android:stackFromBottom="false"/>
+</LinearLayout>

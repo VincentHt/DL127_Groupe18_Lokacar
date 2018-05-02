@@ -1,5 +1,6 @@
 package lokacar.projet.activities;
 
+import lokacar.projet.dal.helper.AppDbHelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
 import lokacar.projet.bo.agence.AgenceContract;
-import lokacar.projet.dal.agences.AgenceDbHelper;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -58,7 +59,7 @@ public class ConnexionActivity extends AppCompatActivity {
     Context context = this;
     String codeAgence = null;
     String nomAgence = null;
-    private AgenceDbHelper dbHelper;
+    private AppDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class ConnexionActivity extends AppCompatActivity {
         mChangeAgencyButton = (Button) findViewById(R.id.btnChangementAgence);
 
         // Create a DB helper (this will create the DB if run for the first time)
-        dbHelper = new AgenceDbHelper(this);
+        dbHelper = new AppDbHelper(this);
 
         mDb = dbHelper.getWritableDatabase();
 
@@ -88,6 +89,7 @@ public class ConnexionActivity extends AppCompatActivity {
         if(cursor.moveToFirst()){
             codeAgence = cursor.getString(cursor.getColumnIndex("code_agence"));
             nomAgence = cursor.getString(cursor.getColumnIndex("nom_agence"));
+            ((AppName) this.getApplication()).setmAppName(nomAgence);
             setTitle(nomAgence);
             showLogin();
         } else {

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Gestion des Véhicules"
         android:layout_margin="10dp"
-        android:onClick="choixActionOnClick"/>
+        android:onClick="choixListeVehiculeOnClick"/>
 
     <Button
         android:id="@+id/btnGestionClients"
