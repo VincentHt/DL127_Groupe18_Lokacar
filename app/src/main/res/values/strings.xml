@@ -5,4 +5,7 @@
     <string name="cdImageAccueil">imageAccueil</string>
     <string name="cdNomLokacar">nomLokacar</string>
     <string name="btnConnexion">Se connecter</string>
+    <string name="database_name">bdd_lokacar.db</string>
+    <string name="title_activity_list_vehicules">ListVehiculesActivity</string>
+    <string name="title_activity_list_locations">ListLocationsActivity</string>
 </resources>

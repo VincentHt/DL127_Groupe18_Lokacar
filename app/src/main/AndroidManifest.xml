@@ -16,7 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActionsChoiceActivity"></activity>
+        <activity android:name=".activities.ActionsChoiceActivity" />
+        <activity
+            android:name=".activities.vehicules.ListVehiculesActivity"
+            android:label="@string/title_activity_list_vehicules"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.locations.ListLocationsActivity"
+            android:label="@string/title_activity_list_locations"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

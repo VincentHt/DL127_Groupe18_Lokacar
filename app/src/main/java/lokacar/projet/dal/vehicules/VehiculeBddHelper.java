@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import lokacar.projet.R;
 import lokacar.projet.bo.vehicules.VehiculeContract;
 
 public class VehiculeBddHelper extends SQLiteOpenHelper {
