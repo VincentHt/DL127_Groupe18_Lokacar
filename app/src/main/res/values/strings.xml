@@ -5,4 +5,22 @@
     <string name="cdImageAccueil">imageAccueil</string>
     <string name="cdNomLokacar">nomLokacar</string>
     <string name="btnConnexion">Se connecter</string>
+    <string name="database_name">bdd_lokacar.db</string>
+    <string name="title_activity_list_vehicules">ListVehiculesActivity</string>
+    <string name="title_activity_list_locations">ListLocationsActivity</string>
+
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="voiture_filtre_text">Voitures</string>
+    <string name="utilitaire_filtre_text">Utilitaires</string>
+    <string name="vehicules_tout">Tout</string>
+    <string name="ajouter_vehicule_text">Ajouter</string>
+    <string name="title_activity_ajouter_modifier_vehicule">AjouterModifierVehiculeActivity</string>
+    <string name="modele_vehicule_text">Modele</string>
+    <string name="marque_vehicule_text">Marque</string>
+    <string name="immatriculation_vehicule_text">Immatriculation</string>
+    <string name="prix_location_jour">Frais de location par jour</string>
+    <string name="type_vehicule_text">Type (voiture, utilitaire)</string>
+    <string name="mMarqueVehiculeTextView">Marque</string>
+    <string name="mModeleVehiculeTextView">Modele</string>
+    <string name="mStatutVehiculeTextView">disponible</string>
 </resources>

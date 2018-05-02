@@ -3,6 +3,7 @@
     package="lokacar.projet">
 
     <application
+        android:name=".app.AppName"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActionsChoiceActivity"></activity>
+        <activity android:name=".activities.ActionsChoiceActivity" />
+        <activity android:name=".activities.vehicules.AjouterModifierVehiculeActivity" />
+        <activity
+            android:name=".activities.vehicules.ListVehiculesActivity"
+            android:label="@string/title_activity_list_vehicules"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

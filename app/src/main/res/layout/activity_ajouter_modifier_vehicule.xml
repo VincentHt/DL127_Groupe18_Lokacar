@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".activities.vehicules.AjouterModifierVehiculeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="394dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/mMarqueVehiculeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/marque_vehicule_text"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/mModeleVehiculeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/modele_vehicule_text"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/mImmatriculationVehiculeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/immatriculation_vehicule_text"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/mFraisLocationParJourEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prix_location_jour"
+            android:inputType="numberDecimal"
+            android:maxLength="2"
+            android:maxLines="5" />
+
+        <RadioGroup
+            android:id="@+id/mTypeVehiculeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="89dp" >
+
+            <RadioButton
+                android:id="@+id/mVoitureRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="auto"
+                android:text="Voiture" />
+            <RadioButton
+                android:id="@+id/mUtilitaireRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Utilitaire" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/mValiderAjouterEditerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:onClick="onclickValiderAjouterVehicule"
+            android:text="Valider"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse" />
+    </LinearLayout>
+
+
+</RelativeLayout>
