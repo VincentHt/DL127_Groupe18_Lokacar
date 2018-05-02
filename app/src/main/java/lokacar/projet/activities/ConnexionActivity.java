@@ -118,6 +118,7 @@ public class ConnexionActivity extends AppCompatActivity {
         mPasswordEditText.setVisibility(View.VISIBLE);
         mValiderConnexionButton.setVisibility(View.VISIBLE);
         if(nomAgence != null){
+            mPasswordEditText.setText("");
             mNomAgenceDefiniTextView.setText(nomAgence);
             mChangeAgencyButton.setVisibility(View.VISIBLE);
         }

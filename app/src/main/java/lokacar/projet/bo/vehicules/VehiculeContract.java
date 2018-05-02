@@ -1,6 +1,6 @@
 package lokacar.projet.bo.vehicules;
 
-public class VehiculeContract {
+public abstract class VehiculeContract {
 
     private final static String TABLE_NAME = "VEHICULES";
     private final static String COL_ID = "ID";
