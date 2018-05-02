@@ -23,6 +23,11 @@
             android:name=".activities.vehicules.ListVehiculesActivity"
             android:label="@string/title_activity_list_vehicules"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.client.ClientDetailsActivity"
+            android:label="ClientDetailsActivity"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

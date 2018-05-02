@@ -1,4 +1,4 @@
-package lokacar.projet.dal.helper.client;
+package lokacar.projet.activities.client;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import lokacar.projet.R;
 import lokacar.projet.bo.client.Client;
+import lokacar.projet.dal.helper.client.ClientDAO;
 
 public class CreateModifyClient extends AppCompatActivity {
 
@@ -157,7 +158,7 @@ public class CreateModifyClient extends AppCompatActivity {
             if (clientId == -1) {
 
 
-                clientDAO.addClient(nouveauClient);
+                clientDAO.insert(nouveauClient);
             }
             else
             {

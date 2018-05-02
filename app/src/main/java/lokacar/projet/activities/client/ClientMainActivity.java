@@ -16,8 +16,7 @@ import java.util.List;
 import lokacar.projet.R;
 import lokacar.projet.adapters.ClientAdapter;
 import lokacar.projet.bo.client.Client;
-import lokacar.projet.dal.client.ClientDAO;
-import lokacar.projet.dal.client.CreateModifyClient;
+import lokacar.projet.dal.helper.client.ClientDAO;
 
 
 public class ClientMainActivity extends AppCompatActivity {

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import lokacar.projet.activities.client.ClientMainActivity;
 import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
@@ -46,6 +48,14 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         Class destinationActivity = ListVehiculesActivity.class;
             Intent myIntent = new Intent(context, destinationActivity);
             startActivity(myIntent);
+    }
+
+
+    public void choixListeClientOnClick(View view) {
+
+        Intent dansTata = new Intent(context, ClientMainActivity.class);
+        startActivity(dansTata);
+
     }
 
     @Override

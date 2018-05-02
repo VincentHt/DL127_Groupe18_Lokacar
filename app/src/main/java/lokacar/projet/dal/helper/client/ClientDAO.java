@@ -45,11 +45,7 @@ public class ClientDAO {
 
     }
 
-    public long addClient(Client client) {
-        // met à jour la liste de client
 
-        return db.insert(TABLE_NAME, null, constructClientDB(client));
-    }
 
     private ContentValues constructClientDB(Client client) {
         ContentValues values = new ContentValues();
@@ -102,8 +98,8 @@ public class ClientDAO {
         return client;
     }
 
-    public void setClient(Integer clientId, Client client) {
-        db.update(TABLE_NAME, constructClientDB(client), "_ID=" + clientId, null);
+    public void setClient(Integer clientId, Client item) {
+        db.update(TABLE_NAME, insert(item), "_ID=" + clientId, null);
     }
 
 
