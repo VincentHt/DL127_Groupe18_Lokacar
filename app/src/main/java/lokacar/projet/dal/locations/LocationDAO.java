@@ -16,20 +16,19 @@ import lokacar.projet.bo.locations.Location;
 import lokacar.projet.bo.locations.LocationContract;
 import lokacar.projet.bo.vehicules.Vehicule;
 import lokacar.projet.bo.vehicules.VehiculeContract;
+import lokacar.projet.dal.helper.AppDbHelper;
 
 public class LocationDAO {
 
     private List<Location> listeLocations;
-    private LocationBddHelper helper;
+    private AppDbHelper helper;
 
     public LocationDAO(Context context){
-        this.helper = new LocationBddHelper(context);
+        this.helper = new AppDbHelper(context);
     }
 
     /**
      * Méthode d'insertion d'une nouvelle location en BDD
-     * @param item The new Location object you want to save
-     * @return
      */
     public long insert(Location item){
 
@@ -42,6 +41,7 @@ public class LocationDAO {
         cv.put(LocationContract.COL_DATE_FIN, item.getDateFin().toString());
 
         long result = db.insert(LocationContract.TABLE_NAME, null, cv);
+        item.setId((int)result);
 
         if(db != null){
             db.close();
@@ -61,7 +61,7 @@ public class LocationDAO {
 
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        /** Requête d'obtention des locations en cours */
+        /* Requête d'obtention des locations en cours */
         Cursor cursorLocation = db.query(
                 LocationContract.TABLE_NAME,
                 null,
@@ -71,7 +71,7 @@ public class LocationDAO {
                 null,
                 LocationContract.COL_DATE_FIN);
 
-        /** On parcourt la liste des locations obtenue plus haut */
+        /* On parcourt la liste des locations obtenue plus haut */
         if(cursorLocation != null && cursorLocation.moveToFirst()){
             do{
                 Integer idLocation = cursorLocation.getInt(cursorLocation.getColumnIndex(LocationContract.COL_ID));
@@ -80,7 +80,7 @@ public class LocationDAO {
                 String dateDebutString = cursorLocation.getString(cursorLocation.getColumnIndex(LocationContract.COL_DATE_DEBUT));
                 String dateFinString = cursorLocation.getString(cursorLocation.getColumnIndex(LocationContract.COL_DATE_FIN));
 
-                /** Récupération de l'état des lieux de début de location */
+                /* Récupération de l'état des lieux de début de location */
                 Cursor cursorEdlDebut = db.query(
                         EtatDesLieuxContract.TABLE_NAME,
                         null,
@@ -99,7 +99,7 @@ public class LocationDAO {
                     location.setEdlDebut(etatDesLieuxDebut);
                 }
 
-                /** Récupération de l'état des lieux de fin de location */
+                /* Récupération de l'état des lieux de fin de location */
                 Cursor cursorEdlFin = db.query(
                         EtatDesLieuxContract.TABLE_NAME,
                         null,
@@ -118,7 +118,7 @@ public class LocationDAO {
                     location.setEdlFin(etatDesLieuxFin);
                 }
 
-                /** Récupération du véhicule */
+                /* Récupération du véhicule */
                 Cursor cursorVehicule = db.query(
                         VehiculeContract.TABLE_NAME,
                         null,
@@ -137,7 +137,7 @@ public class LocationDAO {
                     location.setVehicule(vehicule);
                 }
 
-                /** Récupération du client */
+                /* Récupération du client */
                 /*Cursor cursorClient = db.query(
                         ClientContract.TABLE_NAME,
                         null,
@@ -162,7 +162,7 @@ public class LocationDAO {
                 location.setClient(client);
                 // Fin de partie à modifier
 
-                /** fermeture des différents cursors relatifs à la location courante */
+                /* fermeture des différents cursors relatifs à la location courante */
                 if(cursorEdlDebut != null){
                     cursorEdlDebut.close();
                 }
@@ -178,8 +178,8 @@ public class LocationDAO {
 
                 location.setId(idLocation);
 
-                /** Gestion des dates */
-                    /** Date de début de location */
+                /* Gestion des dates */
+                    /* Date de début de location */
                 if(dateDebutString != null){
                     String[] dateDebutTableau = dateDebutString.split("-");
                     dateDebut = new Date(Integer.parseInt(dateDebutTableau[0]), Integer.parseInt(dateDebutTableau[1]), Integer.parseInt(dateDebutTableau[2]));
@@ -188,7 +188,7 @@ public class LocationDAO {
                 }
                 location.setDateDebut(dateDebut);
 
-                    /** Date de fin de location */
+                    /* Date de fin de location */
                 if( dateFinString != null){
                     String[] dateFinTableau = dateFinString.split("-");
                     dateFin = new Date(Integer.parseInt(dateFinTableau[0]), Integer.parseInt(dateFinTableau[1]), Integer.parseInt(dateFinTableau[2]));
@@ -197,13 +197,13 @@ public class LocationDAO {
                 }
                 location.setDateFin(dateFin);
 
-                /** Ajout de la location à la liste demandée */
+                /* Ajout de la location à la liste demandée */
                 listeLocations.add(location);
 
             }while (cursorLocation.moveToNext());
         }
 
-        /** Fermuture du cursor associé à la requête sur la table LOCATIONS */
+        /* Fermuture du cursor associé à la requête sur la table LOCATIONS */
         if(cursorLocation != null){
             cursorLocation.close();
         }
