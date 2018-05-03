@@ -1,4 +1,4 @@
-package lokacar.projet.bo.vehicules;
+package lokacar.projet.dal.vehicule;
 
 import android.provider.BaseColumns;
 

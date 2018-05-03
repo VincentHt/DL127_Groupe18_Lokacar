@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import lokacar.projet.R;
+import lokacar.projet.dal.vehicule.VehiculeContract;
 
 public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapter.VehiculeViewHolder>{
     private Cursor mCursor;

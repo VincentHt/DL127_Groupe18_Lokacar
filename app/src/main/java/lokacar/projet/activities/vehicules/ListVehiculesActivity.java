@@ -1,6 +1,6 @@
 package lokacar.projet.activities.vehicules;
 
-import lokacar.projet.bo.vehicules.VehiculeContract;
+import lokacar.projet.dal.vehicule.VehiculeContract;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import lokacar.projet.dal.helper.AppDbHelper;

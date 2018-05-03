@@ -4,17 +4,14 @@ import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import lokacar.projet.bo.vehicules.Vehicule;
 import lokacar.projet.dal.helper.AppDbHelper;
-import lokacar.projet.bo.vehicules.VehiculeContract;
-import lokacar.projet.bo.vehicules.Vehicule;
+import lokacar.projet.dal.vehicule.VehiculeContract;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -100,7 +97,7 @@ public class AjouterModifierVehiculeActivity extends AppCompatActivity {
 
     private long addNewVehicule(Vehicule vehicule) {
         ContentValues cv = new ContentValues();
-        cv.put(lokacar.projet.bo.vehicules.VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_MARQUE, vehicule.getMarque());
+        cv.put(VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_MARQUE, vehicule.getMarque());
         cv.put(VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_MODELE, vehicule.getModele());
         cv.put(VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_IMMATRICULATION, vehicule.getImmatriculation());
         cv.put(VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_FRAIS_LICATION_JOUR, vehicule.getPrixJour());

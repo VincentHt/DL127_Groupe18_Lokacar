@@ -20,37 +20,6 @@ import lokacar.projet.bo.agence.AgenceContract;
 
 public class ConnexionActivity extends AppCompatActivity {
 
-    /*private final String login = "Tonton";
-    private final String password = "fuck";
-    private EditText loginField;
-    private EditText passwordField;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        VehiculeDAO dao = new VehiculeDAO(ConnexionActivity.this);
-
-    }
-
-    public void onClickConnexion(View view) {
-
-        loginField = findViewById(R.id.login);
-        passwordField = findViewById(R.id.motDePasse);
-
-        String loginSaisi = loginField.getText().toString();
-        String passwordSaisi = passwordField.getText().toString();
-
-        if(login.equals(loginSaisi) && password.equals(passwordSaisi)){
-            Intent intent = new Intent(ConnexionActivity.this, ActionsChoiceActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Login ou Mot de passe éronnés", Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
     EditText mChoixNomAgenceEditText,  mPasswordEditText, mPasseAgenceEditText;
     TextView mNomAgenceDefiniTextView;
     Button mValiderNomAgenceButton, mValiderConnexionButton, mChangeAgencyButton;
