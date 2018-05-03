@@ -8,17 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import lokacar.projet.R;
 import lokacar.projet.dal.vehicule.VehiculeContract;
 
 public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapter.VehiculeViewHolder>{
     private Cursor mCursor;
     private Context mContext;
+    private OnItemClickListener listener;
 
-
-    public VehiculeListAdapter(Context context, Cursor cursor) {
+    public VehiculeListAdapter(Context context, Cursor cursor, OnItemClickListener listener) {
         this.mContext = context;
         this.mCursor = cursor;
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Cursor vehicule, int position);
     }
 
     @Override
@@ -31,7 +38,7 @@ public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapte
     }
 
     @Override
-    public void onBindViewHolder(VehiculeViewHolder holder, int position) {
+    public void onBindViewHolder(VehiculeViewHolder holder, final int position) {
         if (!mCursor.moveToPosition(position))
             return;
 
@@ -42,6 +49,14 @@ public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapte
         holder.mMarqueVehiculeTextView.setText(MarqueVehicule);
         holder.mModeleVehiculeTextView.setText(ModeleVehicule);
         holder.itemView.setTag(id);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != listener) {
+                    listener.onItemClick(mCursor, position);
+                }
+            }
+        });
     }
 
 
@@ -62,11 +77,12 @@ public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapte
     }
 
     class VehiculeViewHolder extends RecyclerView.ViewHolder {
-
+         View mView;
          TextView mMarqueVehiculeTextView, mModeleVehiculeTextView, mStatutVehiculeTextView;
 
         public VehiculeViewHolder(View itemView) {
             super(itemView);
+            this.mView = itemView;
             mMarqueVehiculeTextView = itemView.findViewById(R.id.mMarqueVehiculeTextView);
             mModeleVehiculeTextView = itemView.findViewById(R.id.mModeleVehiculeTextView);
             mStatutVehiculeTextView = itemView.findViewById(R.id.mStatutVehiculeTextView);
