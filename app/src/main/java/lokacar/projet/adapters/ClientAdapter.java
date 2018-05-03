@@ -2,6 +2,8 @@ package lokacar.projet.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,53 +17,51 @@ import lokacar.projet.bo.client.Client;
 
 public class ClientAdapter extends ArrayAdapter<Client> {
 
-    private final List<Client> listClients;
-    private final Context context;
     private int resourceId;
- //   private final Resources resources;
 
     public ClientAdapter(@NonNull Context context, int resource, List<Client> listClients) {
         super(context, resource, listClients);
-        this.listClients = listClients;
-        this.context = context;
-     //   this.resourceId = resourceId;
-      //  this.resources = resources;
+        this.resourceId = resource;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, final ViewGroup parent){
+    public View getView(int position, @Nullable View convertView, @NonNull final ViewGroup parent){
 
         ViewHolder holder;
 
-        LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null){
+            LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             holder = new ViewHolder();
 
             convertView = inflater.inflate(resourceId, parent, false);
 
-            holder.nom = (TextView) convertView.findViewById(R.id.ListClientNom);
-            holder.test = (TextView) convertView.findViewById(R.id.Jesaispas);
-
+            holder.nom = convertView.findViewById(R.id.clientItemNom);
+            holder.prenom = convertView.findViewById(R.id.clientItemPrenom);
+            holder.tel =  convertView.findViewById(R.id.clientItemTel);
 
             convertView.setTag(holder);
+            Log.i("TEST" , "converstview NULL");
         }
         else
         {
             holder = (ViewHolder) convertView.getTag();
+            Log.i("TEST" , "converstview NOT NULL");
         }
-        Client client = listClients.get(position);
+       Client client = (Client) getItem(position);
 
         holder.nom.setText(client.getNom());
-
+        holder.prenom.setText(client.getPrenom());
+        holder.tel.setText(client.getTel());
 
         return convertView;
 
     }
 
     static class ViewHolder {
-
         TextView nom;
-        TextView test;
+        TextView prenom;
+        TextView tel;
     }
 }

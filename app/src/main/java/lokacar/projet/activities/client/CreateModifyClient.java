@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class CreateModifyClient extends AppCompatActivity {
   //  private RatingBar rbNote;
     private ProgressBar progress;
   //  private boolean existant = false;
+    Button btnValider;
 
 
     @Override
@@ -38,13 +40,15 @@ public class CreateModifyClient extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(android.R.drawable.btn_star);
 
-        editNom = (EditText) findViewById(R.id.Form_Create_Modify_Nom);
-        editPrenom = (EditText) findViewById(R.id.Form_Create_Modify_Prenom);
-        editAdresse = (EditText) findViewById(R.id.Form_Create_Modify_Adresse);
-        editEmail = (EditText) findViewById(R.id.Form_Create_Modify_Email);
-        editTel = (EditText) findViewById(R.id.Form_Create_Modify_Tel);
-      //  rbNote = (RatingBar) findViewById(R.id.Form_Create_Bar_Note);
-      //  progress = (ProgressBar) findViewById(R.id.Form_Create_progressBar);
+        editNom =  findViewById(R.id.Form_Create_Modify_Nom);
+        editPrenom =  findViewById(R.id.Form_Create_Modify_Prenom);
+        editAdresse =  findViewById(R.id.Form_Create_Modify_Adresse);
+        editEmail =  findViewById(R.id.Form_Create_Modify_Email);
+        editTel =  findViewById(R.id.Form_Create_Modify_Tel);
+        btnValider = findViewById(R.id.btnValidClient);
+
+        progress =  findViewById(R.id.Form_Create_progressBar);
+
 
         clientDAO = new ClientDAO(CreateModifyClient.this);
     }
@@ -195,7 +199,7 @@ public class CreateModifyClient extends AppCompatActivity {
         @Override
         protected Void doInBackground(Integer... params) {
 
-            this.client = clientDAO.getClient(params[0]);
+            this.client = clientDAO.getClientById(params[0]);
 
             return null;
         }

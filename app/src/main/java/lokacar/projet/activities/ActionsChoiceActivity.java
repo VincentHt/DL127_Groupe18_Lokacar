@@ -31,18 +31,6 @@ public class ActionsChoiceActivity extends AppCompatActivity {
 
     }
 
-    public void choixActionOnClick(View view) {
-
-        Intent intent;
-
-        if(btnGestionVehicules.isSelected()){
-            intent = new Intent(ActionsChoiceActivity.this, ListVehiculesActivity.class);
-        } else if(btnGestionClients.isSelected()){
-            /*intent = new Intent(ActionsChoiceActivity.this; ClientsMainActivity.class);*/
-        }
-
-
-    }
 
     public void choixListeVehiculeOnClick(View view){
         Class destinationActivity = ListVehiculesActivity.class;
@@ -53,7 +41,7 @@ public class ActionsChoiceActivity extends AppCompatActivity {
 
     public void choixListeClientOnClick(View view) {
 
-        Intent dansTata = new Intent(context, ClientMainActivity.class);
+        Intent dansTata = new Intent(ActionsChoiceActivity.this, ClientMainActivity.class);
         startActivity(dansTata);
 
     }
@@ -62,5 +50,8 @@ public class ActionsChoiceActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public void gestionLocationsOnClick(View view) {
     }
 }

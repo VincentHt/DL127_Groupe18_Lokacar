@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Gestion des Locations"
-        android:onClick="choixActionOnClick"
+        android:onClick="gestionLocationsOnClick"
         android:layout_margin="10dp"/>
 
 </LinearLayout>

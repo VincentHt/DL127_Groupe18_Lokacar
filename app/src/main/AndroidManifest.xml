@@ -27,6 +27,8 @@
             android:name=".activities.client.ClientDetailsActivity"
             android:label="ClientDetailsActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".activities.client.ClientMainActivity" />
+        <activity android:name=".activities.client.CreateModifyClient" />
 
     </application>
 

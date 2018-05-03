@@ -18,7 +18,6 @@ public class ClientDAO {
     private ClientBDDHelper clientBDDHelper;
     private SQLiteDatabase db;
     private ArrayList<Client> client;
-    private  SQLiteOpenHelper helper;
 
     public ClientDAO(Context context) {
         this.clientBDDHelper = new ClientBDDHelper(context);
@@ -46,7 +45,6 @@ public class ClientDAO {
     }
 
 
-
     private ContentValues constructClientDB(Client client) {
         ContentValues values = new ContentValues();
         values.put("NOM", client.getNom());
@@ -59,19 +57,20 @@ public class ClientDAO {
 
     }
 
-    public ArrayList<Client> getClient() {
+    public ArrayList<Client> getAllClients() {
 
+        db = clientBDDHelper.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_NAME, null, null, null, null, null, null);
         client = new ArrayList<Client>();
 
         while (cursor.moveToNext()) {
-            Integer id = cursor.getInt(cursor.getColumnIndex("_ID"));
-            String nom = cursor.getString(cursor.getColumnIndex("NOM"));
-            String prenom = cursor.getString(cursor.getColumnIndex("PRENOM"));
-            String adresse = cursor.getString(cursor.getColumnIndex("ADRESSE"));
-            String email = cursor.getString(cursor.getColumnIndex("EMAIL"));
-            String tel = cursor.getString(cursor.getColumnIndex("TEL"));
+            Integer id = cursor.getInt(cursor.getColumnIndex(ClientContract.COL_ID));
+            String nom = cursor.getString(cursor.getColumnIndex(ClientContract.COL_NOM));
+            String prenom = cursor.getString(cursor.getColumnIndex(ClientContract.COL_PRENOM));
+            String adresse = cursor.getString(cursor.getColumnIndex(ClientContract.COL_ADRESSE));
+            String email = cursor.getString(cursor.getColumnIndex(ClientContract.COL_EMAIL));
+            String tel = cursor.getString(cursor.getColumnIndex(ClientContract.COL_TEL));
            // Boolean existant = (cursor.getInt(cursor.getColumnIndex("EXISTANT")) == 1);
             client.add(new Client(id, nom, prenom, adresse, email, tel));
         }
@@ -80,17 +79,18 @@ public class ClientDAO {
         return client;
     }
 
-    public Client getClient(Integer id) {
+    public Client getClientById(Integer id) {
+        db = clientBDDHelper.getReadableDatabase();
         Cursor cursor = db.query(
-                TABLE_NAME, null, "_ID=" + String.valueOf(id), null, null, null, "_ID");
+                TABLE_NAME, null, "ID=" + String.valueOf(id), null, null, null, "ID");
         Client client= null;
         if (cursor.moveToFirst()) {
-            client = new Client(cursor.getInt(cursor.getColumnIndex("_ID")),
-                    cursor.getString(cursor.getColumnIndex("NOM")),
-                    cursor.getString(cursor.getColumnIndex("PRENOM")),
-                    cursor.getString(cursor.getColumnIndex("ADRESSE")),
-                    cursor.getString(cursor.getColumnIndex("EMAIL")),
-                    cursor.getString(cursor.getColumnIndex("TEL")));
+            client = new Client(cursor.getInt(cursor.getColumnIndex(ClientContract.COL_ID)),
+                    cursor.getString(cursor.getColumnIndex(ClientContract.COL_NOM)),
+                    cursor.getString(cursor.getColumnIndex(ClientContract.COL_PRENOM)),
+                    cursor.getString(cursor.getColumnIndex(ClientContract.COL_ADRESSE)),
+                    cursor.getString(cursor.getColumnIndex(ClientContract.COL_EMAIL)),
+                    cursor.getString(cursor.getColumnIndex(ClientContract.COL_TEL)));
 
         }
         cursor.close();
@@ -98,20 +98,20 @@ public class ClientDAO {
         return client;
     }
 
-    public void setClient(Integer clientId, Client item) {
-        db.update(TABLE_NAME, insert(item), "_ID=" + clientId, null);
+    public void setClient(Integer clientId, Client client) {
+        db.update(TABLE_NAME, constructClientDB(client), "ID=" + clientId, null);
     }
 
 
-    public void deleteArticle(int articleId) {
+    public void deleteClient(int articleId) {
 
-        db.delete(TABLE_NAME, "_ID=" + articleId, null);
+        db.delete(TABLE_NAME, "ID=" + articleId, null);
 
     }
 
     public void finalize() throws Throwable {
-        if (this.helper != null)
-            this.helper.close();
+        if (this.clientBDDHelper != null)
+            this.clientBDDHelper.close();
         if (db != null)
             db.close();
         super.finalize();

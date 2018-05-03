@@ -3,6 +3,7 @@ package lokacar.projet.activities.client;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,14 @@ public class ClientMainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(android.R.drawable.btn_star);
 
+        FloatingActionButton btnAjoutClient = (FloatingActionButton) findViewById(R.id.btnAjoutClient);
+        btnAjoutClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClientMainActivity.this, CreateModifyClient.class);
+                startActivity(intent);
+            }
+        });
 
         //Création de la DAL
 
@@ -42,9 +51,9 @@ public class ClientMainActivity extends AppCompatActivity {
         //Création d'une liste vide pour initialiser l'adapter
 
         List<Client> listeClient = new ArrayList<>();
-        clientAdapter = new ClientAdapter(this, R.layout.client_main_activity, listeClient);
+        clientAdapter = new ClientAdapter(this, R.layout.client_item_list, listeClient);
 
-        listViewClient = (ListView) findViewById(R.id.listeClient);
+        listViewClient = findViewById(R.id.listeClient);
         listViewClient.setAdapter(clientAdapter);
 
         listViewClient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,7 +90,7 @@ public class ClientMainActivity extends AppCompatActivity {
         //On charge la liste avant l'affichage de l'activité afin que la liste soit
         //mise à jour à chaque fois
         clientAdapter.clear();
-        clientAdapter.addAll(clientDAO.getClient());
+        clientAdapter.addAll(clientDAO.getAllClients());
         clientAdapter.notifyDataSetChanged();
 
         }

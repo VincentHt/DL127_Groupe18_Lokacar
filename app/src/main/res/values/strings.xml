@@ -23,4 +23,5 @@
     <string name="mModeleVehiculeTextView">Modele</string>
     <string name="mStatutVehiculeTextView">disponible</string>
     <string name="return_dao">Sauvegardé</string>
+    <string name="client_delete">Client supprimé</string>
 </resources>
