@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lokacar.projet.activities.locations.LocationEditOrCreateActivity"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center"
+    android:background="#FFF">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:src="@drawable/accueil_lokacar_png"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/txtDateDeDebut"
+            android:layout_weight="1"
+            android:gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/editDateDeDebut"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="@string/hintDateDebutDeLocation"
+            android:inputType="date"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/txtDateDeFin"
+            android:layout_weight="1"
+            android:gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/editDateDeFin"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="@string/hintDateDeFinDeLocation"
+            android:inputType="date"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/txtClient"
+            android:layout_weight="1"/>
+
+       <TextView
+            android:id="@+id/txtViewNomClient"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"/>
+
+        <Button
+            android:id="@+id/btnDetailClient"
+            android:layout_width="@dimen/btnEditOrCreateLocation"
+            android:layout_height="@dimen/btnEditOrCreateLocation"
+            android:background="@android:drawable/ic_dialog_info"
+            android:onClick="detailClientOnClick"
+            android:layout_margin="3dp"/>
+
+        <Button
+            android:id="@+id/btnRechercheClient"
+            android:layout_width="@dimen/btnEditOrCreateLocation"
+            android:layout_height="@dimen/btnEditOrCreateLocation"
+            android:background="@android:drawable/ic_menu_search"
+            android:onClick="rechercheClientOnClick"
+            android:layout_margin="3dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/txtVehicule"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txtViewVehicule"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"/>
+
+        <Button
+            android:id="@+id/btnDetailVehicule"
+            android:layout_width="@dimen/btnEditOrCreateLocation"
+            android:layout_height="@dimen/btnEditOrCreateLocation"
+            android:background="@android:drawable/ic_dialog_info"
+            android:onClick="detailVehiculeOnClick"
+            android:layout_margin="3dp"/>
+
+        <Button
+            android:id="@+id/btnRechercheVehicule"
+            android:layout_width="@dimen/btnEditOrCreateLocation"
+            android:layout_height="@dimen/btnEditOrCreateLocation"
+            android:background="@android:drawable/ic_menu_search"
+            android:onClick="rechercheVehiculeOnClick"
+            android:layout_margin="3dp"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valider"
+        android:onClick="validationEditOrCreateOnClick"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

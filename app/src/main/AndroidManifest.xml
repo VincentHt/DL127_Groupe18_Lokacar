@@ -23,6 +23,14 @@
             android:name=".activities.vehicules.ListVehiculesActivity"
             android:label="@string/title_activity_list_vehicules"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.locations.ListLocationsActivity"
+            android:label="@string/title_activity_list_locations"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.locations.LocationEditOrCreateActivity"
+            android:label="@string/title_activity_editorcreate_location_activity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

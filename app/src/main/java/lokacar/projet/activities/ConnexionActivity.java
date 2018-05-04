@@ -16,7 +16,12 @@ import android.widget.Toast;
 import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
+import lokacar.projet.bo.agence.Agence;
 import lokacar.projet.bo.agence.AgenceContract;
+import lokacar.projet.dal.agences.AgenceDAO;
+import lokacar.projet.dal.agences.AgenceDbHelper;
+import lokacar.projet.dal.helper.AppDbHelper;
+import lokacar.projet.dal.locations.LocationBddHelper;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -57,9 +62,9 @@ public class ConnexionActivity extends AppCompatActivity {
 
     private SQLiteDatabase mDb;
     Context context = this;
-    String codeAgence = null;
-    String nomAgence = null;
+    private Agence agence;
     private AppDbHelper dbHelper;
+    private AgenceDAO agenceDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,28 +79,24 @@ public class ConnexionActivity extends AppCompatActivity {
         mValiderConnexionButton = (Button)findViewById(R.id.mConnectionButton);
         mChangeAgencyButton = (Button) findViewById(R.id.btnChangementAgence);
 
-        // Create a DB helper (this will create the DB if run for the first time)
+        // Create a DB helper (this will create the DB if run for the first time, and the different tables needed in the application)
         dbHelper = new AppDbHelper(this);
 
-        mDb = dbHelper.getWritableDatabase();
+        agenceDAO = new AgenceDAO(context);
 
         chooseInterface();
 
     }
 
     public void chooseInterface(){
-        Cursor cursor = getLogins();
+        agence = getLogins();
 
-        if(cursor.moveToFirst()){
-            codeAgence = cursor.getString(cursor.getColumnIndex("code_agence"));
-            nomAgence = cursor.getString(cursor.getColumnIndex("nom_agence"));
-            ((AppName) this.getApplication()).setmAppName(nomAgence);
-            setTitle(nomAgence);
+        if(agence != null){
+            setTitle(agence.getNom());
             showLogin();
         } else {
             showFirstTimeConnection();
         }
-        cursor.close();
     }
 
     public void showFirstTimeConnection(){
@@ -119,9 +120,9 @@ public class ConnexionActivity extends AppCompatActivity {
         mNomAgenceDefiniTextView.setVisibility(View.VISIBLE);
         mPasswordEditText.setVisibility(View.VISIBLE);
         mValiderConnexionButton.setVisibility(View.VISIBLE);
-        if(nomAgence != null){
+        if(agence.getNom() != null){
             mPasswordEditText.setText("");
-            mNomAgenceDefiniTextView.setText(nomAgence);
+            mNomAgenceDefiniTextView.setText(agence.getNom());
             mChangeAgencyButton.setVisibility(View.VISIBLE);
         }
     }
@@ -141,7 +142,7 @@ public class ConnexionActivity extends AppCompatActivity {
         if ( mPasswordEditText.getText().length() == 0) {
             return;
         }
-        if(codeAgence.equals(mPasswordEditText.getText().toString())){
+        if(agence.getPassword().equals(mPasswordEditText.getText().toString())){
             Class destinationActivity = ActionsChoiceActivity.class;
             Intent myIntent = new Intent(context, destinationActivity);
             startActivity(myIntent);
@@ -153,23 +154,16 @@ public class ConnexionActivity extends AppCompatActivity {
         }
     }
 
-    private Cursor getLogins() {
-        return mDb.query(
-                AgenceContract.AgenceEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+    private Agence getLogins() {
+
+        return agenceDAO.getLogins();
     }
 
     private long initializeApp(String nomAgence, String passeAgence) {
-        ContentValues cv = new ContentValues();
-        cv.put(AgenceContract.AgenceEntry.COLUMN_NOM_AGENCE, nomAgence);
-        cv.put(AgenceContract.AgenceEntry.COLUMN_PASSE_AGENCE, passeAgence);
-        return mDb.insert(AgenceContract.AgenceEntry.TABLE_NAME, null, cv);
+
+        AgenceDAO agenceDAO = new AgenceDAO(context);
+
+        return agenceDAO.insert(nomAgence, passeAgence);
     }
 
     public void changementAgenceOnClick(View view) {
