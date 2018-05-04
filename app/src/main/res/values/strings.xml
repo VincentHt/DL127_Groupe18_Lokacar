@@ -8,7 +8,6 @@
     <string name="database_name">bdd_lokacar.db</string>
     <string name="title_activity_list_vehicules">ListVehiculesActivity</string>
     <string name="title_activity_list_locations">ListLocationsActivity</string>
-
     <string name="title_activity_menu">MenuActivity</string>
     <string name="voiture_filtre_text">Voitures</string>
     <string name="utilitaire_filtre_text">Utilitaires</string>
@@ -23,6 +22,8 @@
     <string name="mMarqueVehiculeTextView">Marque</string>
     <string name="mModeleVehiculeTextView">Modele</string>
     <string name="mStatutVehiculeTextView">disponible</string>
+    <string name="return_dao">Sauvegardé</string>
+    <string name="client_delete">Client supprimé</string>
     <string name="txtBtnGestionVehicules">Gestion des Véhicules</string>
     <string name="txtBtnGestionClients">Gestion des Clients</string>
     <string name="txtBtnGestionLocations">Gestion des Locations</string>

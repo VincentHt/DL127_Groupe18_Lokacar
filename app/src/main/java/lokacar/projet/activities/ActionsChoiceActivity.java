@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import lokacar.projet.activities.client.ClientMainActivity;
 import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
@@ -34,12 +36,6 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gestionClientsOnClick(View view) {
-        /*
-        * Intent intent = new Intent(ActionsChoiceActivity.this, ClientsMainActivity.class);
-        * startActivity(intent);
-        */
-    }
 
     public void gestionLocationsOnClick(View view) {
         Intent intent = new Intent(ActionsChoiceActivity.this, ListLocationsActivity.class);
@@ -52,9 +48,20 @@ public class ActionsChoiceActivity extends AppCompatActivity {
             startActivity(myIntent);
     }
 
+
+    public void choixListeClientOnClick(View view) {
+
+        Intent dansTata = new Intent(ActionsChoiceActivity.this, ClientMainActivity.class);
+        startActivity(dansTata);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public void gestionLocationsOnClick(View view) {
     }
 }

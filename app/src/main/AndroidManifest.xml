@@ -35,6 +35,13 @@
             android:name=".activities.vehicules.DetailsVehiculeActivity"
             android:label="@string/title_activity_details_vehicule"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.client.ClientDetailsActivity"
+            android:label="ClientDetailsActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.client.ClientMainActivity" />
+        <activity android:name=".activities.client.CreateModifyClient" />
+
     </application>
 
 </manifest>

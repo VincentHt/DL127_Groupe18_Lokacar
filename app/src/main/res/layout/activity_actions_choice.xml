@@ -18,8 +18,8 @@
         android:id="@+id/btnGestionClients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txtBtnGestionClients"
-        android:onClick="gestionClientsOnClick"
+        android:text="Gestion des Clients"
+        android:onClick="choixListeClientOnClick"
         android:layout_margin="10dp"/>
 
     <Button
