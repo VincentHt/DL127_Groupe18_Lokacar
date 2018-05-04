@@ -37,4 +37,5 @@
     <string name="txtDateDeFin">Date de fin :</string>
     <string name="hintDateDeFinDeLocation">date de fin de location</string>
     <string name="valider">Valider</string>
+    <string name="title_activity_details_vehicule">DetailsVehiculeActivity</string>
 </resources>

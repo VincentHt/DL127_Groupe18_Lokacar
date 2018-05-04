@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import lokacar.projet.bo.agence.AgenceContract;
-import lokacar.projet.bo.vehicules.VehiculeContract;
+import lokacar.projet.dal.vehicule.VehiculeContract;
 
 public class AppDbHelper extends SQLiteOpenHelper {
    public static final String DATABASE_NAME = "lokacar.db";
@@ -18,15 +18,15 @@ public class AppDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        final String SQL_CREATE_AGENCE_TABLE = "CREATE TABLE " + AgenceContract.AgenceEntry.TABLE_NAME + " (" +
+        final String SQL_CREATE_AGENCE_TABLE = "CREATE TABLE IF NOT EXISTS " + AgenceContract.AgenceEntry.TABLE_NAME + " (" +
                 AgenceContract.AgenceEntry.COLUMN_NOM_AGENCE + " TEXT NOT NULL, " +
                 AgenceContract.AgenceEntry.COLUMN_PASSE_AGENCE + " TEXT NOT NULL " +
                 "); ";
 
         sqLiteDatabase.execSQL(SQL_CREATE_AGENCE_TABLE);
 
-        final String SQL_CREATE_VEHICULE_TABLE = "CREATE TABLE " + VehiculeContract.VehiculeEntry.TABLE_NAME + " (" +
-                lokacar.projet.bo.vehicules.VehiculeContract.VehiculeEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        final String SQL_CREATE_VEHICULE_TABLE = "CREATE TABLE IF NOT EXISTS " + VehiculeContract.VehiculeEntry.TABLE_NAME + " (" +
+                VehiculeContract.VehiculeEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_MARQUE + " TEXT NOT NULL, " +
                 VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_MODELE + " TEXT NOT NULL, " +
                 VehiculeContract.VehiculeEntry.COLUMN_VEHICULE_IMMATRICULATION + " TEXT NOT NULL, " +

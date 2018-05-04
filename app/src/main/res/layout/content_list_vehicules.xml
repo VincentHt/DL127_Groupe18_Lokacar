@@ -56,5 +56,6 @@ tools:context="lokacar.projet.activities.vehicules.ListVehiculesActivity">
     android:id="@+id/mVehiculeRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stackFromBottom="false"/>
+    android:stackFromBottom="false">
+</android.support.v7.widget.RecyclerView>
 </LinearLayout>
