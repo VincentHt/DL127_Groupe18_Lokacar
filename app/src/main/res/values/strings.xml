@@ -16,4 +16,10 @@
     <string name="txtClient">Client :</string>
     <string name="txtDebut">Début :</string>
     <string name="txtFin">Fin :</string>
+    <string name="txtDateDeDebut">Date de début de location :</string>
+    <string name="title_activity_editorcreate_location_activity">EditOrCreateActivity</string>
+    <string name="hintDateDebutDeLocation">date de début de location</string>
+    <string name="txtDateDeFin">Date de fin :</string>
+    <string name="hintDateDeFinDeLocation">date de fin de location</string>
+    <string name="valider">Valider</string>
 </resources>

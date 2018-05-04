@@ -4,10 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import lokacar.projet.bo.clients.Client;
 import lokacar.projet.bo.etatsDesLieux.EtatDesLieux;
@@ -17,6 +21,7 @@ import lokacar.projet.bo.locations.LocationContract;
 import lokacar.projet.bo.vehicules.Vehicule;
 import lokacar.projet.bo.vehicules.VehiculeContract;
 import lokacar.projet.dal.helper.AppDbHelper;
+import lokacar.projet.dal.vehicules.VehiculeDAO;
 
 public class LocationDAO {
 
@@ -30,18 +35,11 @@ public class LocationDAO {
     /**
      * Méthode d'insertion d'une nouvelle location en BDD
      */
-    public long insert(Location item){
+    public long insert(int idVehicule, int idClient, String dateDebut, String dateFin){
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        ContentValues cv = new ContentValues();
-        cv.put(LocationContract.COL_ID_VEHICULE, item.getVehicule().getId());
-        cv.put(LocationContract.COL_ID_CLIENT, item.getClient().getId());
-        cv.put(LocationContract.COL_DATE_DEBUT, item.getDateDebut().toString());
-        cv.put(LocationContract.COL_DATE_FIN, item.getDateFin().toString());
-
-        long result = db.insert(LocationContract.TABLE_NAME, null, cv);
-        item.setId((int)result);
+        long result = db.insert(LocationContract.TABLE_NAME, null, buildContentValues(idVehicule, idClient, dateDebut, dateFin));
 
         if(db != null){
             db.close();
@@ -81,7 +79,7 @@ public class LocationDAO {
                 String dateFinString = cursorLocation.getString(cursorLocation.getColumnIndex(LocationContract.COL_DATE_FIN));
 
                 /* Récupération de l'état des lieux de début de location */
-                Cursor cursorEdlDebut = db.query(
+                /*Cursor cursorEdlDebut = db.query(
                         EtatDesLieuxContract.TABLE_NAME,
                         null,
                         EtatDesLieuxContract.COL_ID_LOCATION + "=? AND " + EtatDesLieuxContract.COL_DEBUT_OU_FIN + "=0",
@@ -97,10 +95,10 @@ public class LocationDAO {
 
                     EtatDesLieux etatDesLieuxDebut = new EtatDesLieux(idEdl, descriptionEdl, null);
                     location.setEdlDebut(etatDesLieuxDebut);
-                }
+                }*/
 
                 /* Récupération de l'état des lieux de fin de location */
-                Cursor cursorEdlFin = db.query(
+               /* Cursor cursorEdlFin = db.query(
                         EtatDesLieuxContract.TABLE_NAME,
                         null,
                         EtatDesLieuxContract.COL_ID_LOCATION + "=? AND " + EtatDesLieuxContract.COL_DEBUT_OU_FIN + "=1",
@@ -116,10 +114,10 @@ public class LocationDAO {
 
                     EtatDesLieux etatDesLieuxFin = new EtatDesLieux(idEdl, descriptionEdl, null);
                     location.setEdlFin(etatDesLieuxFin);
-                }
+                }*/
 
                 /* Récupération du véhicule */
-                Cursor cursorVehicule = db.query(
+                /*Cursor cursorVehicule = db.query(
                         VehiculeContract.TABLE_NAME,
                         null,
                         VehiculeContract.COL_ID + "=?",
@@ -135,7 +133,9 @@ public class LocationDAO {
 
                     Vehicule vehicule = new Vehicule(idVehicule, marque, modele);
                     location.setVehicule(vehicule);
-                }
+                }*/
+                Vehicule vehicule = new Vehicule(1,"Citroen", "Xsara");
+                location.setVehicule(vehicule);
 
                 /* Récupération du client */
                 /*Cursor cursorClient = db.query(
@@ -149,10 +149,11 @@ public class LocationDAO {
                 );
 
                 if(cursorClient != null && cursorClient.moveToFirst()){
-                    String marque = cursorVehicule.getString(cursorVehicule.getColumnIndex(VehiculeContract.COL_MARQUE));
-                    String modele = cursorVehicule.getString(cursorVehicule.getColumnIndex(VehiculeContract.COL_MODELE));
+                    String idClient = cursorClient.getString(cursorClient.getColumnIndex(ClientContract.COL_ID));
+                    String nom = cursorCient.getString(cursorClient.getColumnIndex(ClientContract.COL_NOM));
+                    String prenom = cursorClient.getString(cursorClient.getColumnIndex(ClientContract.COL_PRENOM));
 
-                    Vehicule vehicule = new Vehicule(idVehicule, marque, modele);
+                    Client client = new Client(idClient, nom, prenom);
 
                     location.setVehicule(vehicule);
                 }*/
@@ -163,7 +164,7 @@ public class LocationDAO {
                 // Fin de partie à modifier
 
                 /* fermeture des différents cursors relatifs à la location courante */
-                if(cursorEdlDebut != null){
+                /*if(cursorEdlDebut != null){
                     cursorEdlDebut.close();
                 }
                 if(cursorEdlFin != null){
@@ -171,7 +172,8 @@ public class LocationDAO {
                 }
                 if(cursorVehicule != null){
                     cursorVehicule.close();
-                }
+                }*/
+
                 /*if(cursorClient != null){
                     cursorClient.close();
                 }*/
@@ -182,7 +184,7 @@ public class LocationDAO {
                     /* Date de début de location */
                 if(dateDebutString != null){
                     String[] dateDebutTableau = dateDebutString.split("-");
-                    dateDebut = new Date(Integer.parseInt(dateDebutTableau[0]), Integer.parseInt(dateDebutTableau[1]), Integer.parseInt(dateDebutTableau[2]));
+                    dateDebut = new Date(2000,1,1);
                 } else {
                     dateDebut = new Date(0,0,0);
                 }
@@ -190,8 +192,9 @@ public class LocationDAO {
 
                     /* Date de fin de location */
                 if( dateFinString != null){
-                    String[] dateFinTableau = dateFinString.split("-");
-                    dateFin = new Date(Integer.parseInt(dateFinTableau[0]), Integer.parseInt(dateFinTableau[1]), Integer.parseInt(dateFinTableau[2]));
+                    //String[] dateFinTableau = dateFinString.split("-");
+                    //dateFin = new Date(Integer.parseInt(dateFinTableau[0]), Integer.parseInt(dateFinTableau[1]), Integer.parseInt(dateFinTableau[2]));
+                    dateFin = new Date(2000,1,1);
                 } else {
                     dateFin = new Date(0,0,0);
                 }
@@ -211,4 +214,37 @@ public class LocationDAO {
         return listeLocations;
     }
 
+    public void insertTest(){
+        Client client = new Client(1, "","");
+        Vehicule vehicule = new Vehicule(1,"","");
+
+        Location location1 = new Location(new Date("01/01/18"), new Date("01/31/18"),vehicule,client);
+        Location location2 = new Location(new Date("01/02/18"), new Date("01/30/18"),vehicule,client);
+        Location location3 = new Location(new Date("01/03/18"), new Date("01/29/18"),vehicule,client);
+        Location location4 = new Location(new Date("01/04/18"), new Date("01/28/18"),vehicule,client);
+
+        Log.i("test2", String.valueOf(new Date("01/01/18")));
+
+        insert(vehicule.getId(), client.getId(), String.valueOf(new Date("01/01/2018")), String.valueOf(new Date("01/31/2018")));
+        insert(vehicule.getId(), client.getId(), String.valueOf(new Date("01/02/2018")), String.valueOf(new Date("01/30/2018")));
+        insert(vehicule.getId(), client.getId(), String.valueOf(new Date("01/03/2018")), String.valueOf(new Date("01/29/2018")));
+        insert(vehicule.getId(), client.getId(), String.valueOf(new Date("01/04/2018")), String.valueOf(new Date("01/28/2018")));
+
+    }
+
+    private ContentValues buildContentValues(int idVehicule, int idClient, String dateDebut, String dateFin){
+        ContentValues cv = new ContentValues();
+        cv.put(LocationContract.COL_ID_VEHICULE, idVehicule);
+        cv.put(LocationContract.COL_ID_CLIENT, idClient);
+        cv.put(LocationContract.COL_DATE_DEBUT, dateDebut);
+        cv.put(LocationContract.COL_DATE_FIN, dateFin);
+        return cv;
+    }
+
+    public void update(int id, int idVehicule, int idClient, String dateDebut, String dateFin){
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        db.update(LocationContract.TABLE_NAME, buildContentValues(idVehicule, idClient, dateDebut, dateFin), "ID=?", new String[]{String.valueOf(id)});
+    }
 }

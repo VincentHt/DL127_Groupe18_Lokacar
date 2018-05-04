@@ -1,12 +1,15 @@
 package lokacar.projet.bo.locations;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 import lokacar.projet.bo.clients.Client;
 import lokacar.projet.bo.etatsDesLieux.EtatDesLieux;
 import lokacar.projet.bo.vehicules.Vehicule;
 
-public class Location {
+public class Location implements Parcelable{
 
     private int id;
     private Date dateDebut;
@@ -17,6 +20,13 @@ public class Location {
     private Client client;
 
     public Location() {
+    }
+
+    public Location(Date dateDebut, Date dateFin, Vehicule vehicule, Client client) {
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.vehicule = vehicule;
+        this.client = client;
     }
 
     public Location(int id, Date dateDebut, Date dateFin, Vehicule vehicule, EtatDesLieux edlDebut, Client client) {
@@ -37,6 +47,37 @@ public class Location {
         this.edlFin = edlFin;
         this.client = client;
     }
+
+    protected Location(Parcel in) {
+        id = in.readInt();
+        vehicule = in.readParcelable(Vehicule.class.getClassLoader());
+        client = in.readParcelable(Client.class.getClassLoader());
+
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeParcelable(vehicule, flags);
+        dest.writeParcelable(client, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Location> CREATOR = new Creator<Location>() {
+        @Override
+        public Location createFromParcel(Parcel in) {
+            return new Location(in);
+        }
+
+        @Override
+        public Location[] newArray(int size) {
+            return new Location[size];
+        }
+    };
 
     public int getId() {
         return id;

@@ -51,12 +51,14 @@ public class LocationAdapter extends ArrayAdapter<Location> {
 
         Location location = (Location) getItem(position);
 
-        holder.marque.setText(location.getVehicule().getMarque());
-        holder.modele.setText(location.getVehicule().getModele());
-        holder.nomClient.setText(location.getClient().getNom());
-        holder.prenomClient.setText(location.getClient().getPrenom());
-        holder.dateDebut.setText(location.getDateDebut().toString());
-        holder.dateFin.setText(location.getDateFin().toString());
+        if(location != null) {
+            holder.marque.setText(location.getVehicule().getMarque());
+            holder.modele.setText(location.getVehicule().getModele());
+            holder.nomClient.setText(location.getClient().getNom());
+            holder.prenomClient.setText(location.getClient().getPrenom());
+            holder.dateDebut.setText(location.getDateDebut().toString());
+            holder.dateFin.setText(location.getDateFin().toString());
+        }
 
         return convertView;
     }
