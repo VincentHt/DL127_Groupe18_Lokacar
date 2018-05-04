@@ -15,7 +15,6 @@ import lokacar.projet.activities.vehicules.ListVehiculesActivity;
 
 public class ActionsChoiceActivity extends AppCompatActivity {
 
-    private Button btnGestionVehicules, btnGestionClients, btnGestionLocations;
     android.content.Context context = this;
 
     @Override
@@ -23,17 +22,8 @@ public class ActionsChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actions_choice);
 
-        btnGestionClients = findViewById(R.id.btnGestionClients);
-        btnGestionVehicules = findViewById(R.id.btnGestionVehicules);
-        btnGestionLocations = findViewById(R.id.btnGestionLocations);
-    }
-
         String mAppName = ((AppName) this.getApplication()).getmAppName();
         setTitle(mAppName);
-
-    public void gestionVehiculesOnClick(View view) {
-        Intent intent = new Intent(ActionsChoiceActivity.this, ListVehiculesActivity.class);
-        startActivity(intent);
     }
 
 
@@ -60,8 +50,5 @@ public class ActionsChoiceActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    public void gestionLocationsOnClick(View view) {
     }
 }

@@ -1,24 +1,20 @@
 package lokacar.projet.activities.vehicules;
 
-import lokacar.projet.bo.vehicules.Vehicule;
-import lokacar.projet.dal.vehicule.VehiculeContract;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
+
+import lokacar.projet.activities.ActionsChoiceActivity;
+import lokacar.projet.bo.vehicules.VehiculeContract;
 import lokacar.projet.dal.helper.AppDbHelper;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.List;
-
-import lokacar.projet.bo.vehicules.VehiculeListAdapter;
+import lokacar.projet.adapters.VehiculeListAdapter;
 
 import lokacar.projet.R;
 import lokacar.projet.app.AppName;
@@ -28,14 +24,17 @@ public class ListVehiculesActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(Cursor cursor, int position) {
-            Class destinationActivity = DetailsVehiculeActivity.class;
-            Intent myIntent = new Intent(context, destinationActivity);
 
             if (cursor.moveToPosition(position)){
-                Log.i("TAG_VEH",Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))) + " test");
-                myIntent.putExtra("idVehicule", Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))));
+                if(!getIntent().getBooleanExtra("choixLocation", false)){
+                    Intent myIntent = new Intent(context, DetailsVehiculeActivity.class);
+                    myIntent.putExtra("idVehicule", Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))));
+                    Log.i("TAG_VEH",Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))) + " test");
+                    startActivity(myIntent);
+                } else {
 
-                startActivity(myIntent);
+                }
+
             }
 
 
@@ -71,8 +70,18 @@ public class ListVehiculesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ActionsChoiceActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

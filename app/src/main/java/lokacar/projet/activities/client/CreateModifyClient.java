@@ -13,8 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import lokacar.projet.R;
+import lokacar.projet.activities.ActionsChoiceActivity;
 import lokacar.projet.bo.client.Client;
-import lokacar.projet.dal.helper.client.ClientDAO;
+import lokacar.projet.dal.clients.ClientDAO;
 
 public class CreateModifyClient extends AppCompatActivity {
 
@@ -67,10 +68,19 @@ public class CreateModifyClient extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_create, menu);
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ClientMainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onClickButtonAjouter(View view) {
@@ -131,21 +141,6 @@ public class CreateModifyClient extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-
-        //no inspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     // Class interne AsyncTask permettant de lancer une tâche lourde pouvant bloquer l'UI
     private class InsertOrUpdate extends AsyncTask<Void, Integer, String> {

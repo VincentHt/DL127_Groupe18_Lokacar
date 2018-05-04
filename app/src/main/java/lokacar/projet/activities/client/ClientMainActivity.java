@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lokacar.projet.R;
+import lokacar.projet.activities.ActionsChoiceActivity;
 import lokacar.projet.adapters.ClientAdapter;
 import lokacar.projet.bo.client.Client;
-import lokacar.projet.dal.helper.client.ClientDAO;
+import lokacar.projet.dal.clients.ClientDAO;
 
 
 public class ClientMainActivity extends AppCompatActivity {
@@ -100,26 +101,19 @@ public class ClientMainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_liste, menu);
-            return true;
-        }
-
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
+        return true;
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ActionsChoiceActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

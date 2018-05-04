@@ -1,31 +1,31 @@
-package lokacar.projet.dal.helper.client;
+package lokacar.projet.dal.clients;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
 import lokacar.projet.bo.client.Client;
 import lokacar.projet.bo.client.ClientContract;
+import lokacar.projet.dal.helper.AppDbHelper;
 
 import static lokacar.projet.bo.client.ClientContract.TABLE_NAME;
 
 public class ClientDAO {
 
-    private ClientBDDHelper clientBDDHelper;
+    private AppDbHelper helper;
     private SQLiteDatabase db;
     private ArrayList<Client> client;
 
     public ClientDAO(Context context) {
-        this.clientBDDHelper = new ClientBDDHelper(context);
+        this.helper = new AppDbHelper(context);
     }
 
     public long insert(Client item) {
 
-        SQLiteDatabase db = clientBDDHelper.getWritableDatabase();
+        SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues c = new ContentValues();
         c.put(ClientContract.COL_NOM, item.getNom());
@@ -59,7 +59,7 @@ public class ClientDAO {
 
     public ArrayList<Client> getAllClients() {
 
-        db = clientBDDHelper.getReadableDatabase();
+        db = helper.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_NAME, null, null, null, null, null, null);
         client = new ArrayList<Client>();
@@ -80,7 +80,7 @@ public class ClientDAO {
     }
 
     public Client getClientById(Integer id) {
-        db = clientBDDHelper.getReadableDatabase();
+        db = helper.getReadableDatabase();
         Cursor cursor = db.query(
                 TABLE_NAME, null, "ID=" + String.valueOf(id), null, null, null, "ID");
         Client client= null;
@@ -110,8 +110,8 @@ public class ClientDAO {
     }
 
     public void finalize() throws Throwable {
-        if (this.clientBDDHelper != null)
-            this.clientBDDHelper.close();
+        if (this.helper != null)
+            this.helper.close();
         if (db != null)
             db.close();
         super.finalize();

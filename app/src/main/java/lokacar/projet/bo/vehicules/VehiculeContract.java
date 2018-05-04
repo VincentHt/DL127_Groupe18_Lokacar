@@ -3,6 +3,8 @@ package lokacar.projet.bo.vehicules;
 import android.provider.BaseColumns;
 
 public class VehiculeContract {
+
+
     public static final class VehiculeEntry implements BaseColumns {
         public static final String TABLE_NAME = "vehicule";
         public static final String COLUMN_VEHICULE_MARQUE = "marque";

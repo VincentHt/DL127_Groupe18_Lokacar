@@ -5,14 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import lokacar.projet.R;
+import lokacar.projet.activities.ActionsChoiceActivity;
 import lokacar.projet.bo.client.Client;
-import lokacar.projet.dal.helper.client.ClientDAO;
+import lokacar.projet.dal.clients.ClientDAO;
 
 
 public class ClientDetailsActivity extends AppCompatActivity {
@@ -32,16 +33,23 @@ public class ClientDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_details);
 
-    //   getSupportActionBar().setDisplayShowHomeEnabled(true);
-     //   getSupportActionBar().setIcon(android.R.drawable.btn_star);
         clientDAO = new ClientDAO(ClientDetailsActivity.this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_client_detail, menu);
-
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ClientMainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

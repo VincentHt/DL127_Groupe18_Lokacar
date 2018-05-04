@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-import lokacar.projet.bo.clients.Client;
+import lokacar.projet.bo.client.Client;
 import lokacar.projet.bo.etatsDesLieux.EtatDesLieux;
 import lokacar.projet.bo.vehicules.Vehicule;
 

@@ -1,10 +1,13 @@
 package lokacar.projet.activities.vehicules;
 
+import android.view.MenuItem;
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
+
+import lokacar.projet.activities.ActionsChoiceActivity;
 import lokacar.projet.bo.vehicules.Vehicule;
+import lokacar.projet.bo.vehicules.VehiculeContract;
 import lokacar.projet.dal.helper.AppDbHelper;
-import lokacar.projet.dal.vehicule.VehiculeContract;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -109,7 +112,21 @@ public class AjouterModifierVehiculeActivity extends AppCompatActivity {
         return mDb.insert(VehiculeContract.VehiculeEntry.TABLE_NAME, null, cv);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
+        return true;
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ListVehiculesActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 

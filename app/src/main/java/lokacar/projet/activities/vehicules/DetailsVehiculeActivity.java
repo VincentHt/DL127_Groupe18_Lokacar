@@ -7,14 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import lokacar.projet.R;
+import lokacar.projet.activities.ActionsChoiceActivity;
+import lokacar.projet.activities.locations.LocationEditOrCreateActivity;
 import lokacar.projet.bo.vehicules.Vehicule;
+import lokacar.projet.bo.vehicules.VehiculeContract;
 import lokacar.projet.dal.helper.AppDbHelper;
-import lokacar.projet.dal.vehicule.VehiculeContract;
 
 
 public class DetailsVehiculeActivity extends AppCompatActivity {
@@ -70,5 +72,21 @@ public class DetailsVehiculeActivity extends AppCompatActivity {
         Intent myIntent = new Intent(context, destinationActivity);
         myIntent.putExtra("vehicule", vehicule);
         startActivity(myIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_liste, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.retour:
+                Intent intent = new Intent(this, ListVehiculesActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

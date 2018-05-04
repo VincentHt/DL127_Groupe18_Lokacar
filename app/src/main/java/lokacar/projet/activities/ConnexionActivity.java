@@ -1,27 +1,22 @@
 package lokacar.projet.activities;
 
 import lokacar.projet.dal.helper.AppDbHelper;
-import android.content.ContentValues;
+
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import lokacar.projet.app.AppName;
 
 import lokacar.projet.R;
 import lokacar.projet.bo.agence.Agence;
-import lokacar.projet.bo.agence.AgenceContract;
 import lokacar.projet.dal.agences.AgenceDAO;
-import lokacar.projet.dal.agences.AgenceDbHelper;
-import lokacar.projet.dal.helper.AppDbHelper;
-import lokacar.projet.dal.locations.LocationBddHelper;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -50,6 +45,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
         // Create a DB helper (this will create the DB if run for the first time, and the different tables needed in the application)
         dbHelper = new AppDbHelper(this);
+        mDb = dbHelper.getWritableDatabase();
 
         agenceDAO = new AgenceDAO(context);
 
@@ -63,8 +59,10 @@ public class ConnexionActivity extends AppCompatActivity {
         if(agence != null){
             setTitle(agence.getNom());
             showLogin();
+            Log.i("TESTING", "agence not null");
         } else {
             showFirstTimeConnection();
+            Log.i("TESTING", "agence null");
         }
     }
 

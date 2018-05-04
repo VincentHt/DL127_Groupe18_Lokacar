@@ -1,4 +1,4 @@
-package lokacar.projet.bo.vehicules;
+package lokacar.projet.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import lokacar.projet.R;
-import lokacar.projet.dal.vehicule.VehiculeContract;
+import lokacar.projet.bo.vehicules.VehiculeContract;
 
 public class VehiculeListAdapter extends RecyclerView.Adapter<VehiculeListAdapter.VehiculeViewHolder>{
     private Cursor mCursor;
