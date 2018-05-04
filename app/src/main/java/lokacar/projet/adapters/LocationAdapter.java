@@ -13,7 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class LocationAdapter extends ArrayAdapter<Location> {
 
@@ -56,8 +58,12 @@ public class LocationAdapter extends ArrayAdapter<Location> {
             holder.modele.setText(location.getVehicule().getModele());
             holder.nomClient.setText(location.getClient().getNom());
             holder.prenomClient.setText(location.getClient().getPrenom());
-            holder.dateDebut.setText(location.getDateDebut().toString());
-            holder.dateFin.setText(location.getDateFin().toString());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+
+            holder.dateDebut.setText(String.valueOf(sdf.format(location.getDateDebut())));
+            holder.dateFin.setText(String.valueOf(sdf.format(location.getDateFin())));
+
         }
 
         return convertView;

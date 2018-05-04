@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
 import lokacar.projet.activities.ActionsChoiceActivity;
+import lokacar.projet.bo.vehicules.Vehicule;
 import lokacar.projet.bo.vehicules.VehiculeContract;
 import lokacar.projet.dal.helper.AppDbHelper;
 import android.os.Bundle;
@@ -20,19 +21,25 @@ import lokacar.projet.R;
 import lokacar.projet.app.AppName;
 public class ListVehiculesActivity extends AppCompatActivity {
 
+    private AppDbHelper helper;
+
     private class MonListener implements VehiculeListAdapter.OnItemClickListener{
 
         @Override
         public void onItemClick(Cursor cursor, int position) {
 
             if (cursor.moveToPosition(position)){
+                Vehicule vehicule = new Vehicule(1, "Citroen", "Xsara", "AA-000-AA", 5, "voiture");
                 if(!getIntent().getBooleanExtra("choixLocation", false)){
                     Intent myIntent = new Intent(context, DetailsVehiculeActivity.class);
                     myIntent.putExtra("idVehicule", Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))));
                     Log.i("TAG_VEH",Integer.toString(cursor.getInt(cursor.getColumnIndex("_id"))) + " test");
                     startActivity(myIntent);
                 } else {
-
+                    Intent intent = new Intent ();
+                    intent.putExtra("vehicule", vehicule);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
 
             }

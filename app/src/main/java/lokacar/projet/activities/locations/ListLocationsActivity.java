@@ -25,6 +25,7 @@ public class ListLocationsActivity extends AppCompatActivity {
     LocationDAO locationDAO;
     ListView locationListView;
     List<Location> listeLocations;
+    LocationAdapter locationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,9 @@ public class ListLocationsActivity extends AppCompatActivity {
 
         locationListView = findViewById(R.id.locationListView);
         locationDAO = new LocationDAO(this);
-        listeLocations = locationDAO.getAllByDate(new Date(2018,1,15));
-        locationListView.setAdapter(new LocationAdapter(this, R.layout.locations_item_list, listeLocations));
+        listeLocations = locationDAO.getAllByDate(new Date());
+        locationAdapter = new LocationAdapter(this, R.layout.locations_item_list, listeLocations);
+        locationListView.setAdapter(locationAdapter);
 
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,6 +66,17 @@ public class ListLocationsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+
+        locationAdapter.clear();
+        listeLocations = locationDAO.getAllByDate(new Date());
+        locationAdapter = new LocationAdapter(this, R.layout.locations_item_list, listeLocations);
+        locationListView.setAdapter(locationAdapter);
+
+        super.onResume();
     }
 
     @Override

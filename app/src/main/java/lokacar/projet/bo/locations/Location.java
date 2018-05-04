@@ -3,7 +3,9 @@ package lokacar.projet.bo.locations;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import lokacar.projet.bo.client.Client;
 import lokacar.projet.bo.etatsDesLieux.EtatDesLieux;
@@ -53,6 +55,12 @@ public class Location implements Parcelable{
         vehicule = in.readParcelable(Vehicule.class.getClassLoader());
         client = in.readParcelable(Client.class.getClassLoader());
 
+        String[] dateDebutTableau = in.readString().split("/");
+        setDateDebut(new Date((Integer.parseInt(dateDebutTableau[2])-1900), Integer.parseInt(dateDebutTableau[1])-1, Integer.parseInt(dateDebutTableau[0])+0));
+
+        String[] dateFinTableau = in.readString().split("/");
+        setDateFin(new Date((Integer.parseInt(dateFinTableau[2])-1900), Integer.parseInt(dateFinTableau[1])-1, Integer.parseInt(dateFinTableau[0])+0));
+
     }
 
     @Override
@@ -60,6 +68,10 @@ public class Location implements Parcelable{
         dest.writeInt(id);
         dest.writeParcelable(vehicule, flags);
         dest.writeParcelable(client, flags);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        dest.writeString(String.valueOf(sdf.format(dateDebut)));
+        dest.writeString(String.valueOf(sdf.format(dateFin)));
     }
 
     @Override

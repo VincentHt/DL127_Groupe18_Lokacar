@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,10 +62,19 @@ public class ClientMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Client client = (Client) parent.getItemAtPosition(position);
-                Intent intent = new Intent(ClientMainActivity.this, ClientDetailsActivity.class);
-                intent.putExtra("clientId", client.getId());
-                startActivity(intent);
+                if(!getIntent().getBooleanExtra("choixLocation", false)) {
+                    Intent intent = new Intent(ClientMainActivity.this, ClientDetailsActivity.class);
+                    intent.putExtra("clientId", client.getId());
+                    startActivity(intent);
+                } else {
+                    Log.i("CLIENTTEST", client.toString());
+                    Intent intent = new Intent ();
+                    intent.putExtra("client", client);
+                    Log.i("INTENT CLIENT", intent.getParcelableExtra("client").toString());
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
+            }
         }
         );
 

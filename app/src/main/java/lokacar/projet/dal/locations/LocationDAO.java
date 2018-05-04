@@ -42,7 +42,7 @@ public class LocationDAO {
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        long result = db.insert(LocationContract.TABLE_NAME, null, buildContentValues(location.getVehicule(), location.getClient(), location.getDateDebut(), location.getDateFin()));
+        long result = db.insert(LocationContract.TABLE_NAME, null, buildContentValues(location));
 
         if(db != null){
             db.close();
@@ -66,8 +66,8 @@ public class LocationDAO {
         Cursor cursorLocation = db.query(
                 LocationContract.TABLE_NAME,
                 null,
-                LocationContract.COL_DATE_FIN+">=?",
-                new String[]{today.toString()},
+                null,
+                null,
                 null,
                 null,
                 LocationContract.COL_DATE_FIN);
@@ -157,25 +157,21 @@ public class LocationDAO {
 
                 /* Gestion des dates */
                     /* Date de début de location */
+
                 if(dateDebutString != null){
-                    String[] dateDebutTableau = dateDebutString.split("-");
-                    dateDebut = new Date(2000,1,1);
-                } else {
-                    dateDebut = new Date(0,0,0);
+                    String[] dateDebutTableau = dateDebutString.split("/");
+                    dateDebut = new Date((Integer.parseInt(dateDebutTableau[2])-1900), Integer.parseInt(dateDebutTableau[1])-1, Integer.parseInt(dateDebutTableau[0])+0);
+                    location.setDateDebut(dateDebut);
                 }
-                location.setDateDebut(dateDebut);
 
                     /* Date de fin de location */
-                if( dateFinString != null){
-                    //String[] dateFinTableau = dateFinString.split("-");
-                    //dateFin = new Date(Integer.parseInt(dateFinTableau[0]), Integer.parseInt(dateFinTableau[1]), Integer.parseInt(dateFinTableau[2]));
-                    dateFin = new Date(2000,1,1);
-                } else {
-                    dateFin = new Date(0,0,0);
+                if(dateFinString != null) {
+                    String[] dateFinTableau = dateFinString.split("/");
+                    dateFin = new Date((Integer.parseInt(dateFinTableau[2]) - 1900), Integer.parseInt(dateFinTableau[1]) - 1, Integer.parseInt(dateFinTableau[0]) + 0);
+                    location.setDateFin(dateFin);
                 }
-                location.setDateFin(dateFin);
 
-                /* Ajout de la location à la liste demandée */
+                    /* Ajout de la location à la liste demandée */
                 listeLocations.add(location);
 
             }while (cursorLocation.moveToNext());
@@ -189,12 +185,16 @@ public class LocationDAO {
         return listeLocations;
     }
 
-    private ContentValues buildContentValues(Vehicule vehicule, Client client, Date dateDebut, Date dateFin){
+    private ContentValues buildContentValues(Location location){
         ContentValues cv = new ContentValues();
-        cv.put(LocationContract.COL_ID_VEHICULE, vehicule.getId());
-        cv.put(LocationContract.COL_ID_CLIENT, client.getId());
-        cv.put(LocationContract.COL_DATE_DEBUT, String.valueOf(dateDebut));
-        cv.put(LocationContract.COL_DATE_FIN, String.valueOf(dateFin));
+        cv.put(LocationContract.COL_ID_VEHICULE, location.getVehicule().getId());
+        cv.put(LocationContract.COL_ID_CLIENT, location.getClient().getId());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        cv.put(LocationContract.COL_DATE_DEBUT, String.valueOf(sdf.format(location.getDateDebut())));
+        Log.i("LectureDate" , String.valueOf(sdf.format(location.getDateDebut())));
+        cv.put(LocationContract.COL_DATE_FIN, String.valueOf(sdf.format(location.getDateFin())));
+
         return cv;
     }
 
@@ -202,7 +202,7 @@ public class LocationDAO {
 
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        db.update(LocationContract.TABLE_NAME, buildContentValues(location.getVehicule(), location.getClient(), location.getDateDebut(), location.getDateFin()), "ID=?", new String[]{String.valueOf(location.getId())});
+        db.update(LocationContract.TABLE_NAME, buildContentValues(location), "ID=?", new String[]{String.valueOf(location.getId())});
     }
 
     private Cursor getVehicule(int id) {

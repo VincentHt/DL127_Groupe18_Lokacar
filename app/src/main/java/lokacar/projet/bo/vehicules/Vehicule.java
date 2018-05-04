@@ -33,6 +33,18 @@ public class Vehicule implements Parcelable {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "id=" + id +
+                ", marque='" + marque + '\'' +
+                ", modele='" + modele + '\'' +
+                ", immatriculation='" + immatriculation + '\'' +
+                ", type='" + type + '\'' +
+                ", prixJour=" + prixJour +
+                '}';
+    }
+
     public String getMarque() {
         return marque;
     }
@@ -80,13 +92,20 @@ public class Vehicule implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(marque);
+        dest.writeString(modele);
+        dest.writeString(immatriculation);
+        dest.writeFloat(prixJour);
+
 
     }
     protected Vehicule(Parcel in) {
+        id = in.readInt();
         marque = in.readString();
         modele = in.readString();
         immatriculation = in.readString();
-        prixJour = in.readInt();
+        prixJour = in.readFloat();
     }
     public static final Creator<Vehicule> CREATOR = new Creator<Vehicule>() {
         @Override
